@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		53C2C9132C442F1600A5ABF5 /* PokedexDataKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 53C2C9122C442F1600A5ABF5 /* PokedexDataKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		53C2C9242C44314C00A5ABF5 /* ToolsboxSDK_Core in Frameworks */ = {isa = PBXBuildFile; productRef = 53C2C9232C44314C00A5ABF5 /* ToolsboxSDK_Core */; };
+		53C2C9262C44314C00A5ABF5 /* ToolsboxSDK_Helpers in Frameworks */ = {isa = PBXBuildFile; productRef = 53C2C9252C44314C00A5ABF5 /* ToolsboxSDK_Helpers */; };
+		53C2C9282C44314C00A5ABF5 /* ToolsboxSDK_Network in Frameworks */ = {isa = PBXBuildFile; productRef = 53C2C9272C44314C00A5ABF5 /* ToolsboxSDK_Network */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +23,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53C2C9282C44314C00A5ABF5 /* ToolsboxSDK_Network in Frameworks */,
+				53C2C9242C44314C00A5ABF5 /* ToolsboxSDK_Core in Frameworks */,
+				53C2C9262C44314C00A5ABF5 /* ToolsboxSDK_Helpers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +84,11 @@
 			dependencies = (
 			);
 			name = PokedexDataKit;
+			packageProductDependencies = (
+				53C2C9232C44314C00A5ABF5 /* ToolsboxSDK_Core */,
+				53C2C9252C44314C00A5ABF5 /* ToolsboxSDK_Helpers */,
+				53C2C9272C44314C00A5ABF5 /* ToolsboxSDK_Network */,
+			);
 			productName = PokedexDataKit;
 			productReference = 53C2C90F2C442F1600A5ABF5 /* PokedexDataKit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -106,6 +117,9 @@
 				Base,
 			);
 			mainGroup = 53C2C9052C442F1600A5ABF5;
+			packageReferences = (
+				53C2C9222C44314C00A5ABF5 /* XCRemoteSwiftPackageReference "ToolsboxSDK" */,
+			);
 			productRefGroup = 53C2C9102C442F1600A5ABF5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -264,7 +278,7 @@
 		53C2C9172C442F1600A5ABF5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -305,7 +319,7 @@
 		53C2C9182C442F1600A5ABF5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -364,6 +378,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		53C2C9222C44314C00A5ABF5 /* XCRemoteSwiftPackageReference "ToolsboxSDK" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/thib-lambert/ToolsboxSDK";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		53C2C9232C44314C00A5ABF5 /* ToolsboxSDK_Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 53C2C9222C44314C00A5ABF5 /* XCRemoteSwiftPackageReference "ToolsboxSDK" */;
+			productName = ToolsboxSDK_Core;
+		};
+		53C2C9252C44314C00A5ABF5 /* ToolsboxSDK_Helpers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 53C2C9222C44314C00A5ABF5 /* XCRemoteSwiftPackageReference "ToolsboxSDK" */;
+			productName = ToolsboxSDK_Helpers;
+		};
+		53C2C9272C44314C00A5ABF5 /* ToolsboxSDK_Network */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 53C2C9222C44314C00A5ABF5 /* XCRemoteSwiftPackageReference "ToolsboxSDK" */;
+			productName = ToolsboxSDK_Network;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 53C2C9062C442F1600A5ABF5 /* Project object */;
 }
