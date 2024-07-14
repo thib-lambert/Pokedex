@@ -23,5 +23,5 @@ extension PokeAPIRequest {
 	
 	var scheme: String { "https" }
 	var host: String { "pokeapi.co" }
-	var path: String { "api/v2/\(self.module.rawValue)/\(self.route)/" }
+	var path: String { "/api/v2/\(self.module.rawValue)/\(self.route)" }
 }
