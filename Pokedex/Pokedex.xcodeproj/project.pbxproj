@@ -10,13 +10,30 @@
 		53865B5E2C44241900DF80EF /* PokedexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53865B5D2C44241900DF80EF /* PokedexApp.swift */; };
 		53865B602C44241900DF80EF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53865B5F2C44241900DF80EF /* ContentView.swift */; };
 		53865B622C44241B00DF80EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53865B612C44241B00DF80EF /* Assets.xcassets */; };
+		53C2C91B2C44300A00A5ABF5 /* PokedexDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53C2C91A2C44300A00A5ABF5 /* PokedexDataKit.framework */; };
+		53C2C91C2C44300A00A5ABF5 /* PokedexDataKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53C2C91A2C44300A00A5ABF5 /* PokedexDataKit.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		53C2C91D2C44300A00A5ABF5 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				53C2C91C2C44300A00A5ABF5 /* PokedexDataKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		53865B5A2C44241900DF80EF /* Pokedex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pokedex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53865B5D2C44241900DF80EF /* PokedexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexApp.swift; sourceTree = "<group>"; };
 		53865B5F2C44241900DF80EF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		53865B612C44241B00DF80EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		53C2C91A2C44300A00A5ABF5 /* PokedexDataKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PokedexDataKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -24,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53C2C91B2C44300A00A5ABF5 /* PokedexDataKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -35,6 +53,7 @@
 			children = (
 				53865B5C2C44241900DF80EF /* Pokedex */,
 				53865B5B2C44241900DF80EF /* Products */,
+				53C2C9192C44300A00A5ABF5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +75,14 @@
 			path = Pokedex;
 			sourceTree = "<group>";
 		};
+		53C2C9192C44300A00A5ABF5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				53C2C91A2C44300A00A5ABF5 /* PokedexDataKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -66,6 +93,7 @@
 				53865B562C44241900DF80EF /* Sources */,
 				53865B572C44241900DF80EF /* Frameworks */,
 				53865B582C44241900DF80EF /* Resources */,
+				53C2C91D2C44300A00A5ABF5 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
