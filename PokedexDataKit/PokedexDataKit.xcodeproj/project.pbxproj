@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		532A44CB2C4439FF00F9B660 /* ToolsboxSDK_Core in Frameworks */ = {isa = PBXBuildFile; productRef = 532A44CA2C4439FF00F9B660 /* ToolsboxSDK_Core */; };
+		532A44CD2C4439FF00F9B660 /* ToolsboxSDK_Helpers in Frameworks */ = {isa = PBXBuildFile; productRef = 532A44CC2C4439FF00F9B660 /* ToolsboxSDK_Helpers */; };
+		532A44CF2C4439FF00F9B660 /* ToolsboxSDK_Network in Frameworks */ = {isa = PBXBuildFile; productRef = 532A44CE2C4439FF00F9B660 /* ToolsboxSDK_Network */; };
 		53C2C9132C442F1600A5ABF5 /* PokedexDataKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 53C2C9122C442F1600A5ABF5 /* PokedexDataKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		53C2C9242C44314C00A5ABF5 /* ToolsboxSDK_Core in Frameworks */ = {isa = PBXBuildFile; productRef = 53C2C9232C44314C00A5ABF5 /* ToolsboxSDK_Core */; };
-		53C2C9262C44314C00A5ABF5 /* ToolsboxSDK_Helpers in Frameworks */ = {isa = PBXBuildFile; productRef = 53C2C9252C44314C00A5ABF5 /* ToolsboxSDK_Helpers */; };
-		53C2C9282C44314C00A5ABF5 /* ToolsboxSDK_Network in Frameworks */ = {isa = PBXBuildFile; productRef = 53C2C9272C44314C00A5ABF5 /* ToolsboxSDK_Network */; };
 		53C2C9212C44305C00A5ABF5 /* PokeAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C2C9202C44305C00A5ABF5 /* PokeAPIRequest.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,9 +25,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53C2C9282C44314C00A5ABF5 /* ToolsboxSDK_Network in Frameworks */,
-				53C2C9242C44314C00A5ABF5 /* ToolsboxSDK_Core in Frameworks */,
-				53C2C9262C44314C00A5ABF5 /* ToolsboxSDK_Helpers in Frameworks */,
+				532A44CF2C4439FF00F9B660 /* ToolsboxSDK_Network in Frameworks */,
+				532A44CB2C4439FF00F9B660 /* ToolsboxSDK_Core in Frameworks */,
+				532A44CD2C4439FF00F9B660 /* ToolsboxSDK_Helpers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,9 +104,9 @@
 			);
 			name = PokedexDataKit;
 			packageProductDependencies = (
-				53C2C9232C44314C00A5ABF5 /* ToolsboxSDK_Core */,
-				53C2C9252C44314C00A5ABF5 /* ToolsboxSDK_Helpers */,
-				53C2C9272C44314C00A5ABF5 /* ToolsboxSDK_Network */,
+				532A44CA2C4439FF00F9B660 /* ToolsboxSDK_Core */,
+				532A44CC2C4439FF00F9B660 /* ToolsboxSDK_Helpers */,
+				532A44CE2C4439FF00F9B660 /* ToolsboxSDK_Network */,
 			);
 			productName = PokedexDataKit;
 			productReference = 53C2C90F2C442F1600A5ABF5 /* PokedexDataKit.framework */;
@@ -137,7 +137,7 @@
 			);
 			mainGroup = 53C2C9052C442F1600A5ABF5;
 			packageReferences = (
-				53C2C9222C44314C00A5ABF5 /* XCRemoteSwiftPackageReference "ToolsboxSDK" */,
+				532A44C92C4439FF00F9B660 /* XCRemoteSwiftPackageReference "ToolsboxSDK" */,
 			);
 			productRefGroup = 53C2C9102C442F1600A5ABF5 /* Products */;
 			projectDirPath = "";
@@ -400,30 +400,30 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		53C2C9222C44314C00A5ABF5 /* XCRemoteSwiftPackageReference "ToolsboxSDK" */ = {
+		532A44C92C4439FF00F9B660 /* XCRemoteSwiftPackageReference "ToolsboxSDK" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/thib-lambert/ToolsboxSDK";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.1;
+				minimumVersion = 1.0.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		53C2C9232C44314C00A5ABF5 /* ToolsboxSDK_Core */ = {
+		532A44CA2C4439FF00F9B660 /* ToolsboxSDK_Core */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 53C2C9222C44314C00A5ABF5 /* XCRemoteSwiftPackageReference "ToolsboxSDK" */;
+			package = 532A44C92C4439FF00F9B660 /* XCRemoteSwiftPackageReference "ToolsboxSDK" */;
 			productName = ToolsboxSDK_Core;
 		};
-		53C2C9252C44314C00A5ABF5 /* ToolsboxSDK_Helpers */ = {
+		532A44CC2C4439FF00F9B660 /* ToolsboxSDK_Helpers */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 53C2C9222C44314C00A5ABF5 /* XCRemoteSwiftPackageReference "ToolsboxSDK" */;
+			package = 532A44C92C4439FF00F9B660 /* XCRemoteSwiftPackageReference "ToolsboxSDK" */;
 			productName = ToolsboxSDK_Helpers;
 		};
-		53C2C9272C44314C00A5ABF5 /* ToolsboxSDK_Network */ = {
+		532A44CE2C4439FF00F9B660 /* ToolsboxSDK_Network */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 53C2C9222C44314C00A5ABF5 /* XCRemoteSwiftPackageReference "ToolsboxSDK" */;
+			package = 532A44C92C4439FF00F9B660 /* XCRemoteSwiftPackageReference "ToolsboxSDK" */;
 			productName = ToolsboxSDK_Network;
 		};
 /* End XCSwiftPackageProductDependency section */
