@@ -11,11 +11,13 @@
 		53C2C9242C44314C00A5ABF5 /* ToolsboxSDK_Core in Frameworks */ = {isa = PBXBuildFile; productRef = 53C2C9232C44314C00A5ABF5 /* ToolsboxSDK_Core */; };
 		53C2C9262C44314C00A5ABF5 /* ToolsboxSDK_Helpers in Frameworks */ = {isa = PBXBuildFile; productRef = 53C2C9252C44314C00A5ABF5 /* ToolsboxSDK_Helpers */; };
 		53C2C9282C44314C00A5ABF5 /* ToolsboxSDK_Network in Frameworks */ = {isa = PBXBuildFile; productRef = 53C2C9272C44314C00A5ABF5 /* ToolsboxSDK_Network */; };
+		53C2C9212C44305C00A5ABF5 /* PokeAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C2C9202C44305C00A5ABF5 /* PokeAPIRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		53C2C90F2C442F1600A5ABF5 /* PokedexDataKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PokedexDataKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53C2C9122C442F1600A5ABF5 /* PokedexDataKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PokedexDataKit.h; sourceTree = "<group>"; };
+		53C2C9202C44305C00A5ABF5 /* PokeAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeAPIRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,9 +53,26 @@
 		53C2C9112C442F1600A5ABF5 /* PokedexDataKit */ = {
 			isa = PBXGroup;
 			children = (
+				53C2C91E2C44303C00A5ABF5 /* Network */,
 				53C2C9122C442F1600A5ABF5 /* PokedexDataKit.h */,
 			);
 			path = PokedexDataKit;
+			sourceTree = "<group>";
+		};
+		53C2C91E2C44303C00A5ABF5 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				53C2C91F2C44304400A5ABF5 /* Requests */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		53C2C91F2C44304400A5ABF5 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				53C2C9202C44305C00A5ABF5 /* PokeAPIRequest.swift */,
+			);
+			path = Requests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,6 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53C2C9212C44305C00A5ABF5 /* PokeAPIRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
