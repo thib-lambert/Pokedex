@@ -6,19 +6,40 @@
 //
 
 import SwiftUI
+import PokedexDataKit
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
+	
+	// MARK: - Variables
+	@State var pokemons: [Pokemon] = []
+	
+	// MARK: - UI
+	var body: some View {
+		ScrollView {
+			LazyVStack {
+				ForEach(self.pokemons, id: \.id) { pokemon in
+					PokemonCell(pokemon: pokemon)
+						.padding(.bottom, 12)
+						.padding(.horizontal, 16)
+				}
+			}
+		}
+		.task {
+			var result: [Pokemon] = []
+			
+			do {
+				for i in 1...151 {
+					let response = try await PokemonWorker().fetch(id: i)
+					result.append(response)
+				}
+				self.pokemons = result
+			} catch {
+				self.pokemons = result
+			}
+		}
+	}
 }
 
 #Preview {
-    ContentView()
+	ContentView()
 }

@@ -12,7 +12,7 @@ public enum Types: String {
 	case bug,
 		 dark,
 		 dragon,
-		 eletric,
+		 electric,
 		 fairy,
 		 fighting,
 		 fire,
