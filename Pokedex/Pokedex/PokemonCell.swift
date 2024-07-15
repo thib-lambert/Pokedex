@@ -45,15 +45,15 @@ struct PokemonCell: View {
 						.resizable()
 						.scaledToFit()
 						.padding(4)
-						.frame(width: 20)
+						.frame(width: 20, height: 20)
 						.background(Color.white)
 						.clipShape(Circle())
 					
 					Text(LocalizedStringKey(type.rawValue.lowercased()))
 						.font(.system(size: 11, weight: .medium))
+						.padding(.trailing, 4)
 				}
-				.padding(.vertical, 4)
-				.padding(.horizontal, 8)
+				.padding(4)
 				.background(type.associatedColor)
 				.clipShape(Capsule())
 			}
@@ -80,14 +80,17 @@ struct PokemonCell: View {
 			
 			AsyncImage(url: self.pokemon.image)
 				.scaledToFit()
-				.frame(width: 94, height: 94)
+				.frame(width: 96, height: 96)
 		}
-		.frame(width: 126, height: 102)
+		.frame(width: 128, height: 104)
 		.background(self.pokemon.mainType?.associatedColor ?? .gray)
 		.clipShape(RoundedRectangle(cornerRadius: 16))
 	}
 }
 
 #Preview {
-	PokemonCell(pokemon: .previewBulbasaur)
+	VStack {
+		PokemonCell(pokemon: .previewBulbasaur)
+		PokemonCell(pokemon: .previewPikachu)
+	}
 }

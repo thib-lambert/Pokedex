@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		532A44D12C44447B00F9B660 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 532A44D02C44447B00F9B660 /* Images.xcassets */; };
+		532A44E42C448B4A00F9B660 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 532A44E32C448B4A00F9B660 /* Localizable.xcstrings */; };
 		532A44E92C450F2900F9B660 /* Types+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532A44E82C450F2900F9B660 /* Types+Color.swift */; };
 		53865B5E2C44241900DF80EF /* PokedexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53865B5D2C44241900DF80EF /* PokedexApp.swift */; };
 		53865B602C44241900DF80EF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53865B5F2C44241900DF80EF /* ContentView.swift */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		532A44D02C44447B00F9B660 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		532A44E32C448B4A00F9B660 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		532A44E82C450F2900F9B660 /* Types+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Types+Color.swift"; sourceTree = "<group>"; };
 		53865B5A2C44241900DF80EF /* Pokedex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pokedex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53865B5D2C44241900DF80EF /* PokedexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexApp.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 			children = (
 				53865B612C44241B00DF80EF /* Colors.xcassets */,
 				532A44D02C44447B00F9B660 /* Images.xcassets */,
+				532A44E32C448B4A00F9B660 /* Localizable.xcstrings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = 53865B512C44241900DF80EF;
 			productRefGroup = 53865B5B2C44241900DF80EF /* Products */;
@@ -196,6 +200,7 @@
 			files = (
 				53865B622C44241B00DF80EF /* Colors.xcassets in Resources */,
 				532A44D12C44447B00F9B660 /* Images.xcassets in Resources */,
+				532A44E42C448B4A00F9B660 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

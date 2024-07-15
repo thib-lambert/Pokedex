@@ -41,4 +41,9 @@ public extension Pokemon {
 										  name: "bulbasaur",
 										  types: [.grass, .poison],
 										  image: URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"))
+	
+	static let previewPikachu = Pokemon(id: 25,
+										  name: "pikachu",
+										  types: [.electric],
+										  image: URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"))
 }
