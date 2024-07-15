@@ -15,4 +15,10 @@ struct PokemonRequest: PokeAPIRequest {
 	var module: PokeAPIModule { .pokemon }
 	var route: String { "\(self.id)" }
 	var method: RequestMethodType { .get }
+	
+	var cacheKey: RequestCacheKey? {
+		RequestCacheKey(key: "\(self.id)",
+						type: .returnCacheDataElseLoad,
+						days: 1)
+	}
 }
