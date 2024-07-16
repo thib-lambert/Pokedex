@@ -11,6 +11,8 @@
 		5328EFA82C467E0400B7115C /* PokemonListViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5328EFA72C467E0400B7115C /* PokemonListViewPresenter.swift */; };
 		5328EFAA2C467E2D00B7115C /* PokemonListViewProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5328EFA92C467E2D00B7115C /* PokemonListViewProperties.swift */; };
 		5328EFAC2C467F4000B7115C /* BaseViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5328EFAB2C467F4000B7115C /* BaseViewModifier.swift */; };
+		5328EFAE2C46939500B7115C /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5328EFAD2C46939500B7115C /* InfoPlist.xcstrings */; };
+		5328EFB12C4698AE00B7115C /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5328EFB02C4698AE00B7115C /* CameraManager.swift */; };
 		532A44D12C44447B00F9B660 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 532A44D02C44447B00F9B660 /* Images.xcassets */; };
 		532A44E42C448B4A00F9B660 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 532A44E32C448B4A00F9B660 /* Localizable.xcstrings */; };
 		532A44E92C450F2900F9B660 /* Types+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532A44E82C450F2900F9B660 /* Types+Color.swift */; };
@@ -45,6 +47,8 @@
 		5328EFA72C467E0400B7115C /* PokemonListViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListViewPresenter.swift; sourceTree = "<group>"; };
 		5328EFA92C467E2D00B7115C /* PokemonListViewProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListViewProperties.swift; sourceTree = "<group>"; };
 		5328EFAB2C467F4000B7115C /* BaseViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModifier.swift; sourceTree = "<group>"; };
+		5328EFAD2C46939500B7115C /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		5328EFB02C4698AE00B7115C /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		532A44D02C44447B00F9B660 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		532A44E32C448B4A00F9B660 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		532A44E82C450F2900F9B660 /* Types+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Types+Color.swift"; sourceTree = "<group>"; };
@@ -100,12 +104,21 @@
 			path = List;
 			sourceTree = "<group>";
 		};
+		5328EFAF2C46989D00B7115C /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				5328EFB02C4698AE00B7115C /* CameraManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		532A44D22C44448000F9B660 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				53865B612C44241B00DF80EF /* Colors.xcassets */,
 				532A44D02C44447B00F9B660 /* Images.xcassets */,
 				532A44E32C448B4A00F9B660 /* Localizable.xcstrings */,
+				5328EFAD2C46939500B7115C /* InfoPlist.xcstrings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -113,6 +126,7 @@
 		532A44E52C450F0100F9B660 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				5328EFAF2C46989D00B7115C /* Managers */,
 				53DD10BD2C458B6000EE922E /* Architecture */,
 				532A44E62C450F0800F9B660 /* Extensions */,
 			);
@@ -253,6 +267,7 @@
 			files = (
 				53865B622C44241B00DF80EF /* Colors.xcassets in Resources */,
 				532A44D12C44447B00F9B660 /* Images.xcassets in Resources */,
+				5328EFAE2C46939500B7115C /* InfoPlist.xcstrings in Resources */,
 				532A44E42C448B4A00F9B660 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53DD10BC2C451D3D00EE922E /* PokemonCell.swift in Sources */,
+				5328EFB12C4698AE00B7115C /* CameraManager.swift in Sources */,
 				5328EFAA2C467E2D00B7115C /* PokemonListViewProperties.swift in Sources */,
 				53865B602C44241900DF80EF /* PokemonListView.swift in Sources */,
 				53DD10C32C458C3600EE922E /* Presenter.swift in Sources */,
