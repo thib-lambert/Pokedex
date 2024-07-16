@@ -10,5 +10,6 @@ import PokedexDataKit
 
 class PokemonListViewProperties: ViewProperties {
 	
-	var pokemons: [Pokemon] = []
+	@Published var pokemons: [Pokemon] = []
+	@Published var canOpenScan = false
 }

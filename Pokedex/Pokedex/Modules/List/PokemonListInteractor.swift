@@ -8,10 +8,11 @@
 import Foundation
 import PokedexDataKit
 
-class PokemonListInteractor: Interactor<PokemonListViewProperties, PokemonListViewPresenter> {
+class PokemonListInteractor: Interactor<PokemonListViewProperties, PokemonListPresenter> {
 	
 	// MARK: - Variables
 	private let pokemonWorker = PokemonWorker()
+	private let cameraManager = CameraManager()
 	
 	func refresh() {
 #warning("Start loader")
@@ -25,14 +26,21 @@ class PokemonListInteractor: Interactor<PokemonListViewProperties, PokemonListVi
 					result.append(response)
 				}
 				
-				self.presenter.display(pokemons: result)
+				self.presenter.update(pokemons: result)
 			} catch {
 #warning("Log error")
-				self.presenter.display(pokemons: [])
+				self.presenter.update(pokemons: [])
 			}
 			
-			self.presenter.display()
 #warning("Stop loader")
+		}
+	}
+	
+	func openScan() {
+		Task {
+			let isAuthorized = await self.cameraManager.isAuthorized
+			self.presenter.update(canShowScan: isAuthorized)
+			self.presenter.display()
 		}
 	}
 }
