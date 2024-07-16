@@ -6,19 +6,19 @@
 //
 
 import SwiftUI
-import PokedexDataKit
 
-struct ContentView: View {
+struct PokemonListView: View {
 	
 	// MARK: - Variables
-	@State var pokemons: [Pokemon] = []
+	private let interactor = PokemonListInteractor()
+	@ObservedObject private var viewProperties = PokemonListViewProperties()
 	
 	// MARK: - UI
 	var body: some View {
 		ZStack(alignment: .bottom) {
 			ScrollView(showsIndicators: false) {
 				LazyVStack {
-					ForEach(self.pokemons, id: \.id) { pokemon in
+					ForEach(self.viewProperties.pokemons, id: \.id) { pokemon in
 						PokemonCell(pokemon: pokemon)
 							.padding(.bottom, 12)
 							.padding(.horizontal, 16)
@@ -41,22 +41,13 @@ struct ContentView: View {
 					.clipShape(Circle())
 			})
 		}
-		.task {
-			var result: [Pokemon] = []
-			
-			do {
-				for i in 1...151 {
-					let response = try await PokemonWorker().fetch(id: i)
-					result.append(response)
-				}
-				self.pokemons = result
-			} catch {
-				self.pokemons = result
-			}
+		.setup(with: self.interactor, and: self.viewProperties)
+		.onAppear {
+			self.interactor.refresh()
 		}
 	}
 }
 
 #Preview {
-	ContentView()
+	PokemonListView()
 }
