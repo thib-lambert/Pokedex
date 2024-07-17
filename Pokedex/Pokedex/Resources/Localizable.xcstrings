@@ -392,6 +392,23 @@
         }
       }
     },
+    "diglet" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diglet"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taupiqueur"
+          }
+        }
+      }
+    },
     "ditto" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -693,7 +710,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Akwakwak"
+            "value" : "Canarticho"
           }
         }
       }
