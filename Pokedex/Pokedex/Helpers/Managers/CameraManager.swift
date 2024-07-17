@@ -17,7 +17,7 @@ class CameraManager: NSObject {
 	private let camera = AVCaptureDevice.default(.builtInWideAngleCamera,
 												 for: .video,
 												 position: .back)
-	private var addToPreviewStream: ((CGImage) -> Void)?
+	private var addToPreviewStream: ((CIImage) -> Void)?
 	
 	var isAuthorized: Bool {
 		get async {
@@ -29,7 +29,7 @@ class CameraManager: NSObject {
 		}
 	}
 	
-	lazy var imagesStream: AsyncStream<CGImage> = {
+	lazy var imagesStream: AsyncStream<CIImage> = {
 		AsyncStream { continuation in
 			self.addToPreviewStream = { image in
 				continuation.yield(image)
@@ -99,14 +99,7 @@ extension CameraManager: AVCaptureVideoDataOutputSampleBufferDelegate {
 		
 		let ciImage = CIImage(cvPixelBuffer: imagePixelBuffer)
 		
-		guard let cgImage = CIContext().createCGImage(ciImage, from: ciImage.extent)
-		else {
-#warning("Add log error")
-			//			log(.camera, "\(Self.self) - Unable to get image from sample buffer")
-			return
-		}
-		
-		self.addToPreviewStream?(cgImage)
+		self.addToPreviewStream?(ciImage)
 	}
 }
 

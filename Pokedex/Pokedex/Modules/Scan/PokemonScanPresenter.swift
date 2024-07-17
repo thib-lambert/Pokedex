@@ -16,7 +16,7 @@ class PokemonScanPresenter: Presenter<PokemonScanViewProperties> {
 		}
 	}
 	
-	func update(_ image: CGImage) {
+	func update(_ image: CGImage?) {
 		Task { @MainActor in
 			self.viewProperties.image = image
 		}

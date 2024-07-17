@@ -29,7 +29,7 @@ struct PokemonScanView: View {
 				
 				if let pokemon = self.viewProperties.pokemon {
 					VStack {
-						Text(pokemon)
+						Text(LocalizedStringKey(pokemon))
 							.font(.system(size: 20, weight: .bold))
 							.foregroundStyle(.white)
 							.frame(width: geo.size.width)
