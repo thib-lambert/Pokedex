@@ -19,9 +19,12 @@ struct PokemonListView: View {
 			ScrollView(showsIndicators: false) {
 				LazyVStack {
 					ForEach(self.viewProperties.pokemons, id: \.id) { pokemon in
-						PokemonCell(pokemon: pokemon)
-							.padding(.bottom, 12)
-							.padding(.horizontal, 16)
+						NavigationLink(destination: PokemonDetailsView(pokemon: pokemon),
+									   label: {
+							PokemonCell(pokemon: pokemon)
+								.padding(.bottom, 12)
+								.padding(.horizontal, 16)
+						})
 					}
 				}
 				.padding(.bottom, 64)

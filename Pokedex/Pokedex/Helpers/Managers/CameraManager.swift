@@ -66,10 +66,10 @@ class CameraManager: NSObject {
 		self.captureSession.addOutput(videoOutput)
 		
 		guard let connection = videoOutput.connection(with: .video),
-			  connection.isVideoOrientationSupported
+			  connection.isVideoRotationAngleSupported(90)
 		else { throw CameraManager.Error.videoOrientationNotSupported }
 		
-		connection.videoOrientation = .portrait
+		connection.videoRotationAngle = 90
 		
 		self.captureSession.commitConfiguration()
 	}

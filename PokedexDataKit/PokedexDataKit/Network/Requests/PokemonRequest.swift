@@ -19,6 +19,6 @@ struct PokemonRequest: PokeAPIRequest {
 	var cacheKey: RequestCacheKey? {
 		RequestCacheKey(key: "\(self.id)",
 						type: .returnCacheDataElseLoad,
-						days: 1)
+						days: 10)
 	}
 }

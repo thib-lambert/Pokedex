@@ -16,14 +16,18 @@ public struct Pokemon {
 	public let types: [Types]
 	public let image: URL?
 	public let mainType: Types?
+	public let height: Double
+	public let weight: Double
 	
 	// MARK: - Init
 	init(from response: PokemonResponse) {
 		self.id = response.id
 		self.name = response.name.lowercased()
 		self.types = response.types.compactMap { Types(rawValue: $0.type.name.lowercased()) }
-		self.image = URL(response.sprites.frontDefault)
+		self.image = URL(response.sprites.other.officialArtwork.frontDefault)
 		self.mainType = self.types.first
+		self.height = response.height
+		self.weight = response.weight
 	}
 	
 	fileprivate init(id: Int, name: String, types: [Types], image: URL?) {
@@ -32,18 +36,26 @@ public struct Pokemon {
 		self.types = types
 		self.image = image
 		self.mainType = types.first
+		self.height = 200
+		self.weight = 100
 	}
 }
 
+// MARK: - Previews
 public extension Pokemon {
 	
 	static let previewBulbasaur = Pokemon(id: 1,
 										  name: "bulbasaur",
 										  types: [.grass, .poison],
-										  image: URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"))
+										  image: URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"))
 	
 	static let previewPikachu = Pokemon(id: 25,
-										  name: "pikachu",
-										  types: [.electric],
-										  image: URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"))
+										name: "pikachu",
+										types: [.electric],
+										image: URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"))
+	
+	static let previewCharizard = Pokemon(id: 6,
+										  name: "charizard",
+										  types: [.fire, .flying],
+										  image: URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png"))
 }

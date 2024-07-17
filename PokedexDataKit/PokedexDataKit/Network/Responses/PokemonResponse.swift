@@ -13,6 +13,8 @@ struct PokemonResponse: Decodable {
 	let name: String
 	let sprites: Sprites
 	let types: [Types]
+	let height: Double
+	let weight: Double
 }
 
 // MARK: - Sprites
@@ -20,12 +22,29 @@ extension PokemonResponse {
 	
 	struct Sprites: Decodable {
 		
-		enum CodingKeys: String, CodingKey {
+		// MARK: - Other
+		struct Other: Decodable {
 			
-			case frontDefault = "front_default"
+			// MARK: - OfficialArtwork
+			struct OfficialArtwork: Decodable {
+				
+				enum CodingKeys: String, CodingKey {
+					
+					case frontDefault = "front_default"
+				}
+				
+				let frontDefault: String
+			}
+			
+			enum CodingKeys: String, CodingKey {
+				
+				case officialArtwork = "official-artwork"
+			}
+			
+			let officialArtwork: OfficialArtwork
 		}
 		
-		let frontDefault: String
+		let other: Other
 	}
 }
 
@@ -35,7 +54,7 @@ extension PokemonResponse {
 	struct Types: Decodable {
 		
 		struct `Type`: Decodable {
-		
+			
 			let name: String
 		}
 		

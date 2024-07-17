@@ -12,7 +12,10 @@ struct PokemonScanView: View {
 	
 	// MARK: - Variables
 	private let interactor = PokemonScanInteractor()
-	@ObservedObject private var viewProperties: PokemonScanViewProperties
+	@ObservedObject private var viewProperties = PokemonScanViewProperties()
+	
+	@Environment(\.dismiss)
+	private var dismiss
 	
 	// MARK: - Body
 	var body: some View {
@@ -58,8 +61,7 @@ struct PokemonScanView: View {
 				Spacer()
 				
 				Button(action: {
-#warning("Close view")
-					print("CLOSE")
+					self.dismiss()
 				}, label: {
 					Image(systemName: "xmark")
 						.resizable()
@@ -75,13 +77,8 @@ struct PokemonScanView: View {
 		.padding(.trailing, 16)
 		.padding(.bottom, 16)
 	}
-	
-	// MARK: - Init
-	init(viewProperties: PokemonScanViewProperties = PokemonScanViewProperties()) {
-		self.viewProperties = viewProperties
-	}
 }
 
 #Preview {
-	PokemonScanView(viewProperties: .previewWithImageAndTitle)
+	PokemonScanView()
 }

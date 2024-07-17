@@ -20,15 +20,4 @@ class PokemonScanViewProperties: ViewProperties {
 		self.pokemon = nil
 		self.image = nil
 	}
-	
-	init(pokemon: String? = nil, image: CGImage? = nil) {
-		self.pokemon = pokemon
-		self.image = image
-	}
-}
-
-extension PokemonScanViewProperties {
-	
-	static let previewWithImageAndTitle = PokemonScanViewProperties(pokemon: "Dracaufeu",
-																	image: UIImage(resource: .typesFire).cgImage)
 }
