@@ -36,6 +36,7 @@
 		53DD10BF2C458B6F00EE922E /* ViewProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DD10BE2C458B6F00EE922E /* ViewProperties.swift */; };
 		53DD10C12C458C1F00EE922E /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DD10C02C458C1F00EE922E /* Interactor.swift */; };
 		53DD10C32C458C3600EE922E /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DD10C22C458C3600EE922E /* Presenter.swift */; };
+		53E7DB4C2C494C4100EBA4D2 /* Logger+Pokedex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E7DB4B2C494C4100EBA4D2 /* Logger+Pokedex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -82,6 +83,7 @@
 		53DD10BE2C458B6F00EE922E /* ViewProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProperties.swift; sourceTree = "<group>"; };
 		53DD10C02C458C1F00EE922E /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		53DD10C22C458C3600EE922E /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
+		53E7DB4B2C494C4100EBA4D2 /* Logger+Pokedex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+Pokedex.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +193,7 @@
 		532A44E62C450F0800F9B660 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				53E7DB4D2C4952ED00EBA4D2 /* Logger */,
 				532A44E72C450F1400F9B660 /* UI */,
 			);
 			path = Extensions;
@@ -257,6 +260,14 @@
 				5328EFAB2C467F4000B7115C /* BaseViewModifier.swift */,
 			);
 			path = Architecture;
+			sourceTree = "<group>";
+		};
+		53E7DB4D2C4952ED00EBA4D2 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				53E7DB4B2C494C4100EBA4D2 /* Logger+Pokedex.swift */,
+			);
+			path = Logger;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -345,6 +356,7 @@
 				5328EFB12C4698AE00B7115C /* CameraManager.swift in Sources */,
 				532476CB2C47C46700159F9E /* PokemonDetailsView.swift in Sources */,
 				5328EFAA2C467E2D00B7115C /* PokemonListViewProperties.swift in Sources */,
+				53E7DB4C2C494C4100EBA4D2 /* Logger+Pokedex.swift in Sources */,
 				53865B602C44241900DF80EF /* PokemonListView.swift in Sources */,
 				53DD10C32C458C3600EE922E /* Presenter.swift in Sources */,
 				5328EFA62C467D6300B7115C /* PokemonListInteractor.swift in Sources */,

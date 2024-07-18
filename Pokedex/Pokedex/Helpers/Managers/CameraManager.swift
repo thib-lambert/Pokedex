@@ -8,16 +8,26 @@
 import Foundation
 import AVFoundation
 import CoreImage
+import os
+
+protocol CameraManagerDelegate: AnyObject {
+	
+	func didReceive(image: CIImage)
+}
 
 class CameraManager: NSObject {
 	
 	// MARK: - Variables
-	private let captureSession = AVCaptureSession()
+	fileprivate lazy var logger = Logger(subsystem: "\(Self.self)")
+	private var captureSession: AVCaptureSession?
 	private let sessionQueue = DispatchQueue(label: "CameraManagerSessionQueue")
 	private let camera = AVCaptureDevice.default(.builtInWideAngleCamera,
 												 for: .video,
 												 position: .back)
-	private var addToPreviewStream: ((CIImage) -> Void)?
+	private var deviceInput: AVCaptureDeviceInput?
+	private var videoOutput: AVCaptureVideoDataOutput?
+	
+	weak var delegate: CameraManagerDelegate?
 	
 	var isAuthorized: Bool {
 		get async {
@@ -29,17 +39,15 @@ class CameraManager: NSObject {
 		}
 	}
 	
-	lazy var imagesStream: AsyncStream<CIImage> = {
-		AsyncStream { continuation in
-			self.addToPreviewStream = { image in
-				continuation.yield(image)
-			}
-		}
-	}()
-	
 	// MARK: - Init
 	deinit {
-		self.captureSession.stopRunning()
+		self.captureSession?.stopRunning()
+		
+		self.deviceInput = nil
+		self.videoOutput = nil
+		self.captureSession = nil
+		
+		self.logger.debug("\(Self.self) was destroyed !")
 	}
 	
 	// MARK: - Setup
@@ -47,23 +55,29 @@ class CameraManager: NSObject {
 		guard await self.isAuthorized
 		else { throw CameraManager.Error.needToBeAuthorize }
 		
+		self.captureSession = AVCaptureSession()
+		guard let captureSession
+		else { throw CameraManager.Error.invalidSession }
+		
 		guard let camera
 		else { throw CameraManager.Error.invalidCamera }
 		
-		let deviceInput = try AVCaptureDeviceInput(device: camera)
-		self.captureSession.beginConfiguration()
+		self.deviceInput = try AVCaptureDeviceInput(device: camera)
+		captureSession.beginConfiguration()
 		
-		let videoOutput = AVCaptureVideoDataOutput()
-		videoOutput.setSampleBufferDelegate(self, queue: self.sessionQueue)
+		self.videoOutput = AVCaptureVideoDataOutput()
+		self.videoOutput?.setSampleBufferDelegate(self, queue: self.sessionQueue)
 		
-		guard self.captureSession.canAddInput(deviceInput)
+		guard let deviceInput,
+			  captureSession.canAddInput(deviceInput)
 		else { throw CameraManager.Error.cannotAddInput }
 		
-		guard self.captureSession.canAddOutput(videoOutput)
+		guard let videoOutput,
+			  captureSession.canAddOutput(videoOutput)
 		else { throw CameraManager.Error.cannotAddOutput }
 		
-		self.captureSession.addInput(deviceInput)
-		self.captureSession.addOutput(videoOutput)
+		captureSession.addInput(deviceInput)
+		captureSession.addOutput(videoOutput)
 		
 		guard let connection = videoOutput.connection(with: .video),
 			  connection.isVideoRotationAngleSupported(90)
@@ -71,7 +85,7 @@ class CameraManager: NSObject {
 		
 		connection.videoRotationAngle = 90
 		
-		self.captureSession.commitConfiguration()
+		captureSession.commitConfiguration()
 	}
 	
 	// MARK: - Start
@@ -79,7 +93,10 @@ class CameraManager: NSObject {
 		guard await self.isAuthorized
 		else { throw CameraManager.Error.needToBeAuthorize }
 		
-		self.captureSession.startRunning()
+		guard let captureSession
+		else { throw CameraManager.Error.invalidSession }
+		
+		captureSession.startRunning()
 	}
 }
 
@@ -92,14 +109,13 @@ extension CameraManager: AVCaptureVideoDataOutputSampleBufferDelegate {
 		let pixelBuffer: CVPixelBuffer? = CMSampleBufferGetImageBuffer(sampleBuffer)
 		guard let imagePixelBuffer = pixelBuffer
 		else {
-#warning("Add log error")
-			//			log(.camera, "\(Self.self) - Unable to get image from sample buffer")
+			self.logger.fault("\(Self.self) - Unable to get image")
 			return
 		}
 		
 		let ciImage = CIImage(cvPixelBuffer: imagePixelBuffer)
 		
-		self.addToPreviewStream?(ciImage)
+		self.delegate?.didReceive(image: ciImage)
 	}
 }
 
@@ -112,29 +128,17 @@ extension CameraManager {
 			 invalidCamera,
 			 cannotAddInput,
 			 cannotAddOutput,
-			 videoOrientationNotSupported
+			 videoOrientationNotSupported,
+			 invalidSession
 		
 		var errorDescription: String? {
 			switch self {
-			case .needToBeAuthorize:
-#warning("Add translation")
-				return "NEED AUTHORIZATION"
-				
-			case .invalidCamera:
-#warning("Add translation")
-				return "NEED CAMERA"
-				
-			case .cannotAddInput:
-#warning("Add translation")
-				return "NEED INPUT"
-				
-			case .cannotAddOutput:
-#warning("Add translation")
-				return "NEED OUTPUT"
-				
-			case .videoOrientationNotSupported:
-#warning("Add translation")
-				return "NEED ORIENTATION"
+			case .needToBeAuthorize: return "Permission required to use the camera !"
+			case .invalidCamera: return "Invalid camera !"
+			case .cannotAddInput: return "Input cannot be added !"
+			case .cannotAddOutput: return "Output cannot be added !"
+			case .videoOrientationNotSupported: return "Orientation angle is not supported !"
+			case .invalidSession: return "Invalid session !"
 			}
 		}
 	}

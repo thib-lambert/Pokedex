@@ -7,12 +7,14 @@
 
 import Foundation
 import PokedexDataKit
+import os
 
 class PokemonListInteractor: Interactor<PokemonListViewProperties, PokemonListPresenter> {
 	
 	// MARK: - Variables
 	private let pokemonWorker = PokemonWorker()
 	private let cameraManager = CameraManager()
+	private lazy var logger = Logger(subsystem: "\(Self.self)")
 	
 	func refresh() {
 #warning("Start loader")
@@ -28,7 +30,7 @@ class PokemonListInteractor: Interactor<PokemonListViewProperties, PokemonListPr
 				
 				self.presenter.update(pokemons: result)
 			} catch {
-#warning("Log error")
+				self.logger.fault("\(error.localizedDescription)")
 				self.presenter.update(pokemons: [])
 			}
 			
@@ -38,9 +40,15 @@ class PokemonListInteractor: Interactor<PokemonListViewProperties, PokemonListPr
 	
 	func openScan() {
 		Task {
-			let isAuthorized = await self.cameraManager.isAuthorized
-			self.presenter.update(canShowScan: isAuthorized)
-			self.presenter.display()
+			do {
+				try await self.cameraManager.setup()
+				self.presenter.update(canShowScan: true)
+			} catch CameraManager.Error.needToBeAuthorize {
+				#warning("Redirect to settings")
+			} catch {
+				self.logger.fault("\(error.localizedDescription)")
+				self.presenter.update(canShowScan: false)
+			}
 		}
 	}
 }

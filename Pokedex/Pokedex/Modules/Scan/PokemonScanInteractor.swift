@@ -8,11 +8,19 @@
 import Foundation
 import CoreImage
 import Vision
+import os
 
 class PokemonScanInteractor: Interactor<PokemonScanViewProperties, PokemonScanPresenter> {
 	
 	// MARK: - Variables
-	private let cameraManager = CameraManager()
+	private lazy var cameraManager: CameraManager = {
+		let camera = CameraManager()
+		camera.delegate = self
+		
+		return camera
+	}()
+	
+	fileprivate lazy var logger = Logger(subsystem: "\(Self.self)")
 	private var canAnalyze = true
 	
 	func startScan() {
@@ -20,29 +28,13 @@ class PokemonScanInteractor: Interactor<PokemonScanViewProperties, PokemonScanPr
 			do {
 				try await self.cameraManager.setup()
 				try await self.cameraManager.start()
-				
-				Task {
-					for await image in self.cameraManager.imagesStream {
-						Task { @MainActor in
-							self.presenter.update(CIContext().createCGImage(image, from: image.extent))
-							
-							do {
-								let result = try self.analyze(image: image)
-								self.presenter.update(pokemon: result?.0)
-							} catch {
-					#warning("Log error")
-								print(error)
-							}
-						}
-					}
-				}
 			} catch {
-#warning("Log error")
+				self.logger.fault("\(error.localizedDescription)")
 			}
 		}
 	}
 	
-	func analyze(image: CIImage) throws -> (String, VNConfidence)? {
+	private func analyze(image: CIImage) throws -> (String, VNConfidence)? {
 		defer { self.canAnalyze = true }
 		self.canAnalyze = false
 		
@@ -58,5 +50,19 @@ class PokemonScanInteractor: Interactor<PokemonScanViewProperties, PokemonScanPr
 		else { return nil }
 		
 		return (firstResult.identifier, firstResult.confidence)
+	}
+}
+
+extension PokemonScanInteractor: CameraManagerDelegate {
+	
+	func didReceive(image: CIImage) {
+		self.presenter.update(CIContext().createCGImage(image, from: image.extent))
+		
+		do {
+			let result = try self.analyze(image: image)
+			self.presenter.update(pokemon: result?.0)
+		} catch {
+			self.logger.fault("\(error.localizedDescription)")
+		}
 	}
 }
