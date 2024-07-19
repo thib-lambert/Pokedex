@@ -9,13 +9,16 @@ import Foundation
 import SwiftUI
 import PokedexDataKit
 
+private let kHeaderHeight: CGFloat = 300
+
 struct PokemonDetailsView: View {
 	
 	// MARK: - Variables
 	private let interactor = PokemonDetailsInteractor()
 	@ObservedObject private var viewProperties = PokemonDetailsViewProperties()
-	
 	private var pokemonTypeColor: Color
+	@State private var offset: CGFloat = .zero
+	
 	let pokemon: Pokemon
 	
 	// MARK: - Body
@@ -27,18 +30,29 @@ struct PokemonDetailsView: View {
 				VStack(spacing: 20) {
 					self.nameAndId
 					self.types
-					
-					Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pulvinar at dui ac rutrum. Duis blandit cursus tortor, et dapibus nibh pretium a. Sed tincidunt scelerisque quam sed porta. Maecenas efficitur felis sit amet dolor elementum tempor. Curabitur non fringilla orci, ac ultrices enim. Aenean eu augue volutpat, malesuada nulla vel, dignissim nisl. Vivamus ut tellus est. Suspendisse sagittis vitae magna vel convallis. Mauris quis porttitor risus. Integer convallis laoreet congue.")
-						.font(.system(size: 14, weight: .regular))
-						.frame(maxWidth: .infinity, alignment: .leading)
-						.foregroundStyle(.black.opacity(0.7))
-					
+					self.description
 					self.informations
 				}
 				.padding(.horizontal, 16)
 			}
+			.background(GeometryReader {
+				Color.clear.preference(key: ViewOffsetKey.self,
+									   value: -$0.frame(in: .named("scroll")).origin.y)
+			}).onPreferenceChange(ViewOffsetKey.self) { self.offset = $0 }
 		}
+		.coordinateSpace(name: "scroll")
 		.scrollBounceBehavior(.basedOnSize)
+		.toolbar {
+			if self.offset >= kHeaderHeight {
+				ToolbarItem(placement: .principal) {
+					AsyncImage(url: self.pokemon.image) {
+						$0.image?.resizable()
+					}
+					.scaledToFit()
+					.padding(.vertical, 4)
+				}
+			}
+		}
 		.setup(with: self.interactor, and: self.viewProperties)
 	}
 	
@@ -73,7 +87,7 @@ struct PokemonDetailsView: View {
 				.padding(.bottom, -24)
 			}
 		}
-		.frame(height: 300)
+		.frame(height: kHeaderHeight)
 	}
 	
 	private var nameAndId: some View {
@@ -96,6 +110,15 @@ struct PokemonDetailsView: View {
 			}
 		}
 		.frame(maxWidth: .infinity, alignment: .leading)
+	}
+	
+	private var description: some View {
+		ForEach(0...3, id: \.self) { _ in
+			Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pulvinar at dui ac rutrum. Duis blandit cursus tortor, et dapibus nibh pretium a. Sed tincidunt scelerisque quam sed porta. Maecenas efficitur felis sit amet dolor elementum tempor. Curabitur non fringilla orci, ac ultrices enim. Aenean eu augue volutpat, malesuada nulla vel, dignissim nisl. Vivamus ut tellus est. Suspendisse sagittis vitae magna vel convallis. Mauris quis porttitor risus. Integer convallis laoreet congue.")
+				.font(.system(size: 14, weight: .regular))
+				.frame(maxWidth: .infinity, alignment: .leading)
+				.foregroundStyle(.black.opacity(0.7))
+		}
 	}
 	
 	private var informations: some View {
@@ -148,14 +171,29 @@ struct PokemonDetailsView: View {
 	}
 }
 
+// MARK: - ViewOffsetKey
+private struct ViewOffsetKey: PreferenceKey {
+	static var defaultValue: CGFloat = .zero
+	static func reduce(value: inout Value, nextValue: () -> Value) {
+		value += nextValue()
+	}
+}
+
+// MARK: - Previews
 #Preview("Charizard") {
-	PokemonDetailsView(pokemon: .previewCharizard)
+	NavigationStack {
+		PokemonDetailsView(pokemon: .previewCharizard)
+	}
 }
 
 #Preview("Pikachu") {
-	PokemonDetailsView(pokemon: .previewPikachu)
+	NavigationStack {
+		PokemonDetailsView(pokemon: .previewPikachu)
+	}
 }
 
 #Preview("Bulbasaur") {
-	PokemonDetailsView(pokemon: .previewBulbasaur)
+	NavigationStack {
+		PokemonDetailsView(pokemon: .previewBulbasaur)
+	}
 }
