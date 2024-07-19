@@ -38,6 +38,7 @@ struct PokemonDetailsView: View {
 				.padding(.horizontal, 16)
 			}
 		}
+		.scrollBounceBehavior(.basedOnSize)
 		.setup(with: self.interactor, and: self.viewProperties)
 	}
 	
@@ -99,11 +100,11 @@ struct PokemonDetailsView: View {
 	
 	private var informations: some View {
 		HStack(spacing: 20) {
-			self.informations(with: "\(self.pokemon.weight)",
+			self.informations(with: self.pokemon.weight.toWeight(maximumFractionDigits: 1),
 							  picto: .informationsWeight,
 							  title: "pokemon_details_weight_title")
 			
-			self.informations(with: "\(self.pokemon.height)",
+			self.informations(with:  self.pokemon.height.toDistance(maximumFractionDigits: 1),
 							  picto: .informationsHeight,
 							  title: "pokemon_details_height_title")
 		}

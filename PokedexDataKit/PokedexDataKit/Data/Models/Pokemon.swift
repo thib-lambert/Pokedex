@@ -26,8 +26,8 @@ public struct Pokemon {
 		self.types = response.types.compactMap { Types(rawValue: $0.type.name.lowercased()) }
 		self.image = URL(response.sprites.other.officialArtwork.frontDefault)
 		self.mainType = self.types.first
-		self.height = response.height
-		self.weight = response.weight
+		self.height = response.height / 10
+		self.weight = response.weight / 10
 	}
 	
 	fileprivate init(id: Int, name: String, types: [Types], image: URL?) {
@@ -36,8 +36,8 @@ public struct Pokemon {
 		self.types = types
 		self.image = image
 		self.mainType = types.first
-		self.height = 200
-		self.weight = 100
+		self.height = 20
+		self.weight = 10
 	}
 }
 
