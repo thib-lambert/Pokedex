@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import PokedexDataKit
+import SDWebImageSwiftUI
 
 private let kHeaderHeight: CGFloat = 300
 
@@ -46,7 +47,7 @@ struct PokemonDetailsView: View {
 		.toolbar {
 			if self.offset >= kHeaderHeight {
 				ToolbarItem(placement: .principal) {
-					AsyncImage(url: self.pokemon.image) {
+					WebImage(url: self.pokemon.image) {
 						$0.image?.resizable()
 					}
 					.scaledToFit()
@@ -73,7 +74,7 @@ struct PokemonDetailsView: View {
 													endPoint: .topLeading))
 			}
 			
-			AsyncImage(url: self.pokemon.image) {
+			WebImage(url: self.pokemon.image) {
 				$0.image?.resizable()
 			}
 			.scaledToFit()

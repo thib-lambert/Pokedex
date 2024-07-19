@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import PokedexDataKit
+import SDWebImageSwiftUI
 
 struct PokemonCell: View {
 	
@@ -64,7 +65,7 @@ struct PokemonCell: View {
 					)
 			}
 			
-			AsyncImage(url: self.pokemon.image) {
+			WebImage(url: self.pokemon.image) {
 				$0.image?.resizable()
 			}
 			.scaledToFit()
