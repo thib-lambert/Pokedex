@@ -45,12 +45,14 @@ struct PokemonListView: View {
 			})
 		}
 		.setup(with: self.interactor, and: self.viewProperties)
-		.onAppear {
-			self.interactor.refresh()
-		}
 		.fullScreenCover(isPresented: self.$viewProperties.canOpenScan) {
 			PokemonScanView()
 		}
+	}
+	
+	// MARK: - Init
+	init() {
+		self.interactor.refresh()
 	}
 }
 
