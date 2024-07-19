@@ -26,6 +26,7 @@ struct PokemonDetailsView: View {
 		ScrollView(showsIndicators: false) {
 			VStack(spacing: 20) {
 				self.header
+					.frame(height: kHeaderHeight)
 				
 				VStack(spacing: 20) {
 					self.nameAndId
@@ -57,37 +58,43 @@ struct PokemonDetailsView: View {
 	}
 	
 	private var header: some View {
-		GeometryReader { geo in
-			ZStack(alignment: .bottom) {
-				Circle()
-					.fill(LinearGradient(colors: [self.pokemonTypeColor.opacity(0.1), self.pokemonTypeColor],
-										 startPoint: .bottomTrailing,
-										 endPoint: .topLeading))
-					.scaleEffect(2)
-					.offset(CGSize(width: 0, height: -geo.size.height / 1.5))
-					.frame(maxWidth: .infinity)
-				
-				if let type = self.pokemon.mainType {
-					Image(type.picto)
-						.renderingMode(.template)
-						.resizable()
-						.scaledToFit()
-						.padding(.bottom, 80)
-						.foregroundStyle(LinearGradient(colors: [.white.opacity(0.1), .white],
-														startPoint: .bottomTrailing,
-														endPoint: .topLeading))
-				}
-				
-				AsyncImage(url: self.pokemon.image) {
-					$0.image?.resizable()
-				}
-				.scaledToFit()
-				.frame(width: geo.size.width - (24 * 2),
-					   height: geo.size.height - 40)
-				.padding(.bottom, -24)
+		ZStack {
+			Rectangle()
+				.frame(height: 0)
+			
+			if let type = self.pokemon.mainType {
+				Image(type.picto)
+					.renderingMode(.template)
+					.resizable()
+					.scaledToFit()
+					.padding(.bottom, 80)
+					.foregroundStyle(LinearGradient(colors: [.white.opacity(0.1), .white],
+													startPoint: .bottomTrailing,
+													endPoint: .topLeading))
 			}
+			
+			AsyncImage(url: self.pokemon.image) {
+				$0.image?.resizable()
+			}
+			.scaledToFit()
+			.padding(.horizontal, 24)
 		}
-		.frame(height: kHeaderHeight)
+		.background(
+			GeometryReader { geo in
+				UnevenRoundedRectangle(bottomLeadingRadius: geo.size.width,
+									   bottomTrailingRadius: geo.size.width)
+				.fill(LinearGradient(colors: [
+					self.pokemonTypeColor.opacity(0.5),
+					self.pokemonTypeColor
+				],
+									 startPoint: .bottomTrailing,
+									 endPoint: .topLeading))
+				.frame(height: UIScreen.main.bounds.height * 2)
+				.offset(x: -24,
+						y: (geo.size.height - 48) - (UIScreen.main.bounds.height * 2))
+				.frame(width: geo.size.width + 48)
+				
+			})
 	}
 	
 	private var nameAndId: some View {
