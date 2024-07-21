@@ -121,12 +121,10 @@ struct PokemonDetailsView: View {
 	}
 	
 	private var description: some View {
-		ForEach(0...3, id: \.self) { _ in
-			Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pulvinar at dui ac rutrum. Duis blandit cursus tortor, et dapibus nibh pretium a. Sed tincidunt scelerisque quam sed porta. Maecenas efficitur felis sit amet dolor elementum tempor. Curabitur non fringilla orci, ac ultrices enim. Aenean eu augue volutpat, malesuada nulla vel, dignissim nisl. Vivamus ut tellus est. Suspendisse sagittis vitae magna vel convallis. Mauris quis porttitor risus. Integer convallis laoreet congue.")
+		Text(self.pokemon.description)
 				.font(.system(size: 14, weight: .regular))
 				.frame(maxWidth: .infinity, alignment: .leading)
 				.foregroundStyle(.black.opacity(0.7))
-		}
 	}
 	
 	private var informations: some View {
