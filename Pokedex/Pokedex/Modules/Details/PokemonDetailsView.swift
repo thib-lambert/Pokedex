@@ -114,14 +114,14 @@ struct PokemonDetailsView: View {
 	private var types: some View {
 		HStack(spacing: 4) {
 			ForEach(self.pokemon.types, id: \.self) { type in
-				TypeTagView(type: type, fontSize: 14)
+				PokemonTypeTagView(type: type, fontSize: 14)
 			}
 		}
 		.frame(maxWidth: .infinity, alignment: .leading)
 	}
 	
 	private var description: some View {
-		Text(self.pokemon.description)
+		Text(self.pokemon.resume)
 				.font(.system(size: 14, weight: .regular))
 				.frame(maxWidth: .infinity, alignment: .leading)
 				.foregroundStyle(.black.opacity(0.7))

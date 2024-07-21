@@ -44,7 +44,7 @@ struct PokemonCell: View {
 	private var types: some View {
 		HStack(spacing: 4) {
 			ForEach(self.pokemon.types, id: \.self) { type in
-				TypeTagView(type: type)
+				PokemonTypeTagView(type: type)
 			}
 		}
 	}

@@ -17,24 +17,22 @@ class PokemonListInteractor: Interactor<PokemonListViewProperties, PokemonListPr
 	private lazy var logger = Logger(subsystem: "\(Self.self)")
 	
 	func refresh() {
-#warning("Start loader")
-		
 		Task {
-			do {
-				var result: [Pokemon] = []
-				
-				for i in 1...151 {
-					let response = try await self.pokemonWorker.fetch(id: i)
-					result.append(response)
+			let data = await withTaskGroup(of: Pokemon?.self) { group in
+				for id in 1...151 {
+					group.addTask {
+						try? await self.loadPokemon(id: id)
+					}
 				}
 				
-				self.presenter.update(pokemons: result)
-			} catch {
-				self.logger.fault("\(error.localizedDescription)")
-				self.presenter.update(pokemons: [])
+				return await group.reduce(into: [Pokemon]()) { partialResult, pokemon in
+					partialResult.append(pokemon)
+				}
 			}
+				.compactMap { $0 }
+				.sorted { $0.order < $1.order }
 			
-#warning("Stop loader")
+			self.presenter.update(pokemons: data)
 		}
 	}
 	
@@ -44,11 +42,20 @@ class PokemonListInteractor: Interactor<PokemonListViewProperties, PokemonListPr
 				try await self.cameraManager.setup()
 				self.presenter.update(canShowScan: true)
 			} catch CameraManager.Error.needToBeAuthorize {
-				#warning("Redirect to settings")
+#warning("Redirect to settings")
 			} catch {
 				self.logger.fault("\(error.localizedDescription)")
 				self.presenter.update(canShowScan: false)
 			}
+		}
+	}
+	
+	private func loadPokemon(id: Int) async throws -> Pokemon {
+		do {
+			return try await self.pokemonWorker.fetch(id: id)
+		} catch {
+			self.logger.fault("Failed to load Pokemon \(id): \(error.localizedDescription)")
+			throw error
 		}
 	}
 }

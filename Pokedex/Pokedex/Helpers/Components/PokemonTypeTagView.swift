@@ -1,5 +1,5 @@
 //
-//  TypeTagView.swift
+//  PokemonTypeTagView.swift
 //  Pokedex
 //
 //  Created by Thibaud Lambert on 17/07/2024.
@@ -9,10 +9,10 @@ import Foundation
 import SwiftUI
 import PokedexDataKit
 
-struct TypeTagView: View {
+struct PokemonTypeTagView: View {
 	
 	// MARK: - Variables
-	let type: Types
+	let type: PokemonType
 	let fontSize: CGFloat
 	
 	// MARK: - Body
@@ -37,7 +37,7 @@ struct TypeTagView: View {
 	}
 	
 	// MARK: - Init
-	init(type: Types, fontSize: CGFloat = 11) {
+	init(type: PokemonType, fontSize: CGFloat = 11) {
 		self.type = type
 		self.fontSize = fontSize
 	}

@@ -1,5 +1,5 @@
 //
-//  Types+Color.swift
+//  PokemonType+Color.swift
 //  Pokedex
 //
 //  Created by Thibaud Lambert on 15/07/2024.
@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import PokedexDataKit
 
-extension Types {
+extension PokemonType {
 	
 	var associatedColor: Color {
 		switch self {

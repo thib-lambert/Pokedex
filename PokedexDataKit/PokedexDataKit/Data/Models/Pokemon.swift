@@ -8,24 +8,33 @@
 import Foundation
 import ToolsboxSDK_Helpers
 
-public struct Pokemon {
+public class Pokemon {
 	
 	// MARK: - Variables
 	public let id: Int
+	public let order: Int
 	public let nameKey: String
 	public let name: String
-	public let types: [Types]
+	private let _types: [String]
 	public let image: URL?
-	public let mainType: Types?
 	public let height: Double
 	public let weight: Double
-	public let description: String
+	public let resume: String
+	
+	public var types: [PokemonType] {
+		self._types.compactMap { PokemonType(rawValue: $0) }
+	}
+	
+	public var mainType: PokemonType? {
+		self.types.first
+	}
 	
 	// MARK: - Init
 	init(with pokemon: PokemonResponse, and species: PokemonSpeciesResponse) {
 		self.id = pokemon.id
+		self.order = pokemon.order
 		self.nameKey = pokemon.name.lowercased()
-		self.types = pokemon.types.compactMap { Types(rawValue: $0.type.name.lowercased()) }
+		self._types = pokemon.types.compactMap { $0.type.name.lowercased() }
 		self.image = URL(pokemon.sprites.other.officialArtwork.frontDefault)
 		self.height = pokemon.height / 10
 		self.weight = pokemon.weight / 10
@@ -36,26 +45,25 @@ public struct Pokemon {
 			.name
 		?? pokemon.name.lowercased()
 		
-		self.description = (species.flavorTextEntries
+		self.resume = (species.flavorTextEntries
 			.first { Locale.current.identifier.starts(with: $0.language.name.lowercased()) }?
 			.flavorText
-							?? species.flavorTextEntries.first { _ in Locale.current.identifier.starts(with: "en") }?
+					   ?? species.flavorTextEntries.first { _ in Locale.current.identifier.starts(with: "en") }?
 			.flavorText
-		?? "")
+					   ?? "")
 		.replacingOccurrences(of: "\n", with: " ")
-		self.mainType = self.types.first
 	}
 	
-	fileprivate init(id: Int, name: String, types: [Types], image: URL?) {
+	fileprivate init(id: Int, name: String, types: [PokemonType], image: URL?) {
 		self.id = id
+		self.order = 1
 		self.nameKey = name
 		self.name = name
-		self.types = types
+		self._types = types.map { $0.rawValue }
 		self.image = image
-		self.mainType = types.first
 		self.height = 20
 		self.weight = 10
-		self.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pulvinar at dui ac rutrum. Duis blandit cursus tortor, et dapibus nibh pretium a. Sed tincidunt scelerisque quam sed porta. Maecenas efficitur felis sit amet dolor elementum tempor. Curabitur non fringilla orci, ac ultrices enim. Aenean eu augue volutpat, malesuada nulla vel, dignissim nisl. Vivamus ut tellus est. Suspendisse sagittis vitae magna vel convallis. Mauris quis porttitor risus. Integer convallis laoreet congue."
+		self.resume = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pulvinar at dui ac rutrum. Duis blandit cursus tortor, et dapibus nibh pretium a. Sed tincidunt scelerisque quam sed porta. Maecenas efficitur felis sit amet dolor elementum tempor. Curabitur non fringilla orci, ac ultrices enim. Aenean eu augue volutpat, malesuada nulla vel, dignissim nisl. Vivamus ut tellus est. Suspendisse sagittis vitae magna vel convallis. Mauris quis porttitor risus. Integer convallis laoreet congue."
 	}
 }
 

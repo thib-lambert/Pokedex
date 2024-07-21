@@ -10,6 +10,7 @@ import Foundation
 struct PokemonResponse: Decodable {
 	
 	let id: Int
+	let order: Int
 	let name: String
 	let sprites: Sprites
 	let types: [Types]
