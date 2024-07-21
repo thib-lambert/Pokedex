@@ -13,7 +13,9 @@ public struct PokemonWorker {
 	public init() { }
 	
 	public func fetch(id: Int) async throws -> Pokemon {
-		let response = try await PokemonRequest(id: id).response(PokemonResponse.self)
-		return Pokemon(from: response)
+		let pokemon = try await PokemonRequest(id: id).response(PokemonResponse.self)
+		let species = try await PokemonSpeciesRequest(id: id).response(PokemonSpeciesResponse.self)
+		
+		return Pokemon(with: pokemon, and: species)
 	}
 }

@@ -11,6 +11,7 @@ import ToolsboxSDK_Network
 enum PokeAPIModule: String {
 	
 	case pokemon
+	case species = "pokemon-species"
 }
 
 protocol PokeAPIRequest: RequestProtocol {

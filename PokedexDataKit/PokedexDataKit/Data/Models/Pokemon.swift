@@ -18,16 +18,24 @@ public struct Pokemon {
 	public let mainType: Types?
 	public let height: Double
 	public let weight: Double
+	public let description: String
 	
 	// MARK: - Init
-	init(from response: PokemonResponse) {
-		self.id = response.id
-		self.name = response.name.lowercased()
-		self.types = response.types.compactMap { Types(rawValue: $0.type.name.lowercased()) }
-		self.image = URL(response.sprites.other.officialArtwork.frontDefault)
+	init(with pokemon: PokemonResponse, and species: PokemonSpeciesResponse) {
+		self.id = pokemon.id
+		self.name = pokemon.name.lowercased()
+		self.types = pokemon.types.compactMap { Types(rawValue: $0.type.name.lowercased()) }
+		self.image = URL(pokemon.sprites.other.officialArtwork.frontDefault)
 		self.mainType = self.types.first
-		self.height = response.height / 10
-		self.weight = response.weight / 10
+		self.height = pokemon.height / 10
+		self.weight = pokemon.weight / 10
+		self.description = (species.flavorTextEntries
+			.first { Locale.current.identifier.starts(with: $0.language.name.lowercased()) }?
+			.flavorText
+							?? species.flavorTextEntries.first { _ in Locale.current.identifier.starts(with: "en") }?
+			.flavorText
+		?? "")
+		.replacingOccurrences(of: "\n", with: " ")
 	}
 	
 	fileprivate init(id: Int, name: String, types: [Types], image: URL?) {
@@ -38,6 +46,7 @@ public struct Pokemon {
 		self.mainType = types.first
 		self.height = 20
 		self.weight = 10
+		self.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pulvinar at dui ac rutrum. Duis blandit cursus tortor, et dapibus nibh pretium a. Sed tincidunt scelerisque quam sed porta. Maecenas efficitur felis sit amet dolor elementum tempor. Curabitur non fringilla orci, ac ultrices enim. Aenean eu augue volutpat, malesuada nulla vel, dignissim nisl. Vivamus ut tellus est. Suspendisse sagittis vitae magna vel convallis. Mauris quis porttitor risus. Integer convallis laoreet congue."
 	}
 }
 
