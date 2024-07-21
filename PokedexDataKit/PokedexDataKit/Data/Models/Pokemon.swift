@@ -12,6 +12,7 @@ public struct Pokemon {
 	
 	// MARK: - Variables
 	public let id: Int
+	public let nameKey: String
 	public let name: String
 	public let types: [Types]
 	public let image: URL?
@@ -23,12 +24,18 @@ public struct Pokemon {
 	// MARK: - Init
 	init(with pokemon: PokemonResponse, and species: PokemonSpeciesResponse) {
 		self.id = pokemon.id
-		self.name = pokemon.name.lowercased()
+		self.nameKey = pokemon.name.lowercased()
 		self.types = pokemon.types.compactMap { Types(rawValue: $0.type.name.lowercased()) }
 		self.image = URL(pokemon.sprites.other.officialArtwork.frontDefault)
-		self.mainType = self.types.first
 		self.height = pokemon.height / 10
 		self.weight = pokemon.weight / 10
+		
+		self.name = species.names.first { Locale.current.identifier.starts(with: $0.language.name.lowercased()) }?
+			.name
+		?? species.names.first { _ in Locale.current.identifier.starts(with: "en") }?
+			.name
+		?? pokemon.name.lowercased()
+		
 		self.description = (species.flavorTextEntries
 			.first { Locale.current.identifier.starts(with: $0.language.name.lowercased()) }?
 			.flavorText
@@ -36,10 +43,12 @@ public struct Pokemon {
 			.flavorText
 		?? "")
 		.replacingOccurrences(of: "\n", with: " ")
+		self.mainType = self.types.first
 	}
 	
 	fileprivate init(id: Int, name: String, types: [Types], image: URL?) {
 		self.id = id
+		self.nameKey = name
 		self.name = name
 		self.types = types
 		self.image = image
