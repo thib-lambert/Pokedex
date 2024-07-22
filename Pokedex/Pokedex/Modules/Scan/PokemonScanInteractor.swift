@@ -46,7 +46,7 @@ class PokemonScanInteractor: Interactor<PokemonScanViewProperties, PokemonScanPr
 		
 		guard let results = request.results as? [VNClassificationObservation],
 			  let firstResult = results.first,
-			  firstResult.confidence >= 0.85
+			  firstResult.confidence >= 0.98
 		else { return nil }
 		
 		return (firstResult.identifier, firstResult.confidence)
