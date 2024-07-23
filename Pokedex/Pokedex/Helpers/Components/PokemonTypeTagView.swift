@@ -21,8 +21,8 @@ struct PokemonTypeTagView: View {
 			Image(self.type.picto)
 				.resizable()
 				.scaledToFit()
+				.frame(width: 16, height: 16)
 				.padding(4)
-				.frame(width: 20, height: 20)
 				.background(Color.white)
 				.clipShape(Circle())
 			
@@ -41,4 +41,8 @@ struct PokemonTypeTagView: View {
 		self.type = type
 		self.fontSize = fontSize
 	}
+}
+
+#Preview {
+	PokemonTypeTagView(type: .fire, fontSize: 14)
 }
